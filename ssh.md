@@ -170,6 +170,28 @@ Host nodeC
 ```ssh-copy-id  nodeC```
 这两条命令就可以了。
 
+为了让你的curl 和git 命令都通过```5555``` 端口访问，你还需要在编写一个如下的文件
+```proxy_setup.sh```
+或者将一下内容放在```~/.bashrc```文件中， 让bash 每次
+启动的时候都会设置一边下面的环境变量
+里面的内容是这样的
+```
+
+http_proxy="http://localhost:5555"
+
+# 将 http 相关的环境变量都设置为代理端口
+export HTTP_PROXY=$http_proxy
+export HTTPS_PROXY=$http_proxy
+export http_proxy=$http_proxy
+export https_proxy=$http_proxy
+
+
+# 设置git 的http 代理， 走 5555 端口
+git config --global http.proxy $http_proxy
+git config --global https.proxy $http_proxy
+```
+
+
 现在，你自己来试一下上面学到的命令吧。
 
 

@@ -94,8 +94,8 @@ $ ssh root@localhost -p 4444
 ```
 ，这样我们就有了一条nodeB 到nodeC 的连接通路了， which means， 我们可以让nodeA 直连nodeC 了，现在node 连接
 情况图片是这样的。
-![image](https://user-images.githubusercontent.com/26542149/162620569-a18f0ab6-0ab6-4c11-b28e-cca9599a8caa.png)
-
+<!-- ![image](https://user-images.githubusercontent.com/26542149/162620569-a18f0ab6-0ab6-4c11-b28e-cca9599a8caa.png) -->
+![image](https://user-images.githubusercontent.com/26542149/162753348-f33c38d3-3648-4557-a578-cf254c0d9473.png)
 
 我稍稍解释一下上面命令每个参数的意思， ```-R``` 示我们将要执行remote forward 远程端口转发
 ，就是将远端的端口转发到本地节点所知的某个节点的端口。
@@ -119,7 +119,7 @@ $  ssh root@28.10.10.45 -p 4444
 ssh 远程端口转发的另一个实用场景是流量代理， 就是做到和vpn 一样的功能。
 场景如下，现在我们在内网的服务器nodeC上不能访问baidu google 等网站，登陆服务器也只能通过跳板机登陆，
 所以我们的网络连通图是这样的，
-
+![image](https://user-images.githubusercontent.com/26542149/162751503-bd259a0f-f0a5-4619-8d9b-c88ed4087cd6.png)
 
 现在nodeA上，也就是我们自己的电脑是可以访问google baidu 的，我们自己电脑上的代理端口是1087， 也就是
 ```
@@ -141,6 +141,9 @@ $ ssh -Nf -R 5555:localhost:1087 root@28.10.10.35 -J nodeB
 ```
 上面的命令就是执行ssh 远程端口转发，将nodeC 上的发送给5555端口的网络包全部转发到本地电脑nodeA 上的1087
 端口， 这样就实现了位于内网的服务器可以访问google 或者执行```git clone ``` 命令了。
+现在我们的网络连通图是这样的，
+
+![image](https://user-images.githubusercontent.com/26542149/162752778-b851e6a5-e646-4755-ab08-fb4a820d5860.png)
 
 第一条命令执行成功的前提是，你在```~/.ssh/config``` 文件里面配置好了nodeC 和nodeB 相关的ip 信息和连接信息。
 比如是这样
